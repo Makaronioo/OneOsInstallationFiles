@@ -11,6 +11,7 @@ permissions:
 env:
   REPO_ONEOS: "fahadalijaved/OneOS"
   REPO_KSU: "tiann/KernelSU"
+  REPO_KSU_SAM: "diabl0w/KernelSu-Samsung"
   REPO_DFROOT: "diabl0w/DFroot"
   REPO_DIRTYFRAG: "mitschud/DirtyFrag"
 
@@ -41,13 +42,15 @@ jobs:
 
           VER_ONEOS=$(latest_tag "$REPO_ONEOS")
           VER_KSU=$(latest_tag "$REPO_KSU")
+          VER_KSU_SAM=$(latest_tag "$REPO_KSU_SAM")
           VER_DFROOT=$(latest_tag "$REPO_DFROOT")
           VER_DIRTYFRAG=$(latest_tag "$REPO_DIRTYFRAG")
 
-          NOTES=$(printf '| Program | Wersja |\n| :--- | :--- |\n| OneOS | %s |\n| OneOS-Probe | %s |\n| KernelSU | %s |\n| DFroot | %s |\n| DirtyFrag | %s |' \
+          NOTES=$(printf '| Program | Wersja |\n| :--- | :--- |\n| OneOS | %s |\n| OneOS-Probe | %s |\n| KernelSU | %s |\n| KernelSU-Samsung | %s |\n| DFroot | %s |\n| DirtyFrag | %s |' \
             "${VER_ONEOS#v}" \
             "${VER_ONEOS#v}" \
             "$VER_KSU" \
+            "$VER_KSU_SAM" \
             "$VER_DFROOT" \
             "$VER_DIRTYFRAG")
 
@@ -60,7 +63,12 @@ jobs:
           fi
 
           rm -rf downloads
-          mkdir -p downloads/oneos downloads/ksu downloads/dfroot downloads/dirtyfrag
+          mkdir -p \
+            downloads/oneos \
+            downloads/ksu \
+            downloads/ksu-sam \
+            downloads/dfroot \
+            downloads/dirtyfrag
 
           gh release download "$VER_ONEOS" \
             --repo "$REPO_ONEOS" \
@@ -73,6 +81,11 @@ jobs:
             --dir downloads/ksu \
             --pattern '*.apk'
 
+          gh release download "$VER_KSU_SAM" \
+            --repo "$REPO_KSU_SAM" \
+            --dir downloads/ksu-sam \
+            --pattern '*.apk'
+
           gh release download "$VER_DFROOT" \
             --repo "$REPO_DFROOT" \
             --dir downloads/dfroot
@@ -81,10 +94,9 @@ jobs:
             --repo "$REPO_DIRTYFRAG" \
             --dir downloads/dirtyfrag
 
-          rm -rf downloads/root
           mkdir -p downloads/root
 
-          for source in oneos ksu dfroot dirtyfrag; do
+          for source in oneos ksu ksu-sam dfroot dirtyfrag; do
             count=0
 
             while IFS= read -r -d '' file; do

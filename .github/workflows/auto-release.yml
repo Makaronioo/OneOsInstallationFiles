@@ -2,7 +2,7 @@ name: Automatyczna aktualizacja paczki
 
 on:
   schedule:
-    - cron: '0 * * * *'
+    - cron: '*/30 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -10,55 +10,107 @@ permissions:
 
 env:
   REPO_ONEOS: "fahadalijaved/OneOS"
-  REPO_KSU: "tiann/KernelSu"
-  REPO_KSU_SAM: "diabl0w/KernelSu-Samsung"
+  REPO_KSU: "tiann/KernelSU"
   REPO_DFROOT: "diabl0w/DFroot"
   REPO_DIRTYFRAG: "mitschud/DirtyFrag"
-  ONEOS_PATTERN_APK: "*.apk"
-  ONEOS_PATTERN_JSON: "*.json"
-  KSU_PATTERN: "*.apk"
-  KSU_SAM_PATTERN: "*.apk"
 
 jobs:
   update-bundle:
     runs-on: ubuntu-latest
     steps:
-      - name: Pobierz najnowsze wersje i utwórz Release
+      - name: Pobierz najnowsze wydania i utwórz Release
         env:
           GH_TOKEN: ${{ github.token }}
+        shell: bash
         run: |
-          VER_ONEOS=$(gh release view --repo "$REPO_ONEOS" --json tagName -q .tagName)
-          VER_KSU=$(gh release view --repo "$REPO_KSU" --json tagName -q .tagName)
-          VER_KSU_SAM=$(gh release view --repo "$REPO_KSU_SAM" --json tagName -q .tagName)
-          VER_DFROOT=$(gh release view --repo "$REPO_DFROOT" --json tagName -q .tagName)
-          VER_DIRTYFRAG=$(gh release view --repo "$REPO_DIRTYFRAG" --json tagName -q .tagName)
+          set -Eeuo pipefail
 
-          NOTES=$(printf "| Program | Wersja |\n| :--- | :--- |\n| OneOS | %s |\n| OneOS-Probe | %s |\n| KernelSu | %s |\n| KernelSu-Samsung | %s |\n| DFroot | %s |\n| DirtyFrag | %s |" \
+          latest_tag() {
+            local repo="$1"
+            local tag
+            if ! tag=$(gh release view --repo "$repo" --json tagName --jq .tagName); then
+              echo "BŁĄD: nie można pobrać najnowszego wydania z $repo." >&2
+              exit 1
+            fi
+            if [[ -z "$tag" ]]; then
+              echo "BŁĄD: brak tagu wydania w $repo." >&2
+              exit 1
+            fi
+            printf '%s' "$tag"
+          }
+
+          VER_ONEOS=$(latest_tag "$REPO_ONEOS")
+          VER_KSU=$(latest_tag "$REPO_KSU")
+          VER_DFROOT=$(latest_tag "$REPO_DFROOT")
+          VER_DIRTYFRAG=$(latest_tag "$REPO_DIRTYFRAG")
+
+          NOTES=$(printf '| Program | Wersja |\n| :--- | :--- |\n| OneOS | %s |\n| OneOS-Probe | %s |\n| KernelSU | %s |\n| DFroot | %s |\n| DirtyFrag | %s |' \
             "${VER_ONEOS#v}" \
             "${VER_ONEOS#v}" \
             "$VER_KSU" \
-            "$VER_KSU_SAM" \
             "$VER_DFROOT" \
             "$VER_DIRTYFRAG")
 
-          LAST_BODY=$(gh release view --repo "${{ github.repository }}" --json body -q .body 2>/dev/null || echo "")
-          if [ "$NOTES" = "$LAST_BODY" ]; then
+          LAST_BODY=$(gh release view --repo "$GITHUB_REPOSITORY" \
+            --json body --jq .body 2>/dev/null || true)
+
+          if [[ "$NOTES" == "$LAST_BODY" ]]; then
             echo "Brak nowych wersji. Pomijam tworzenie Release."
             exit 0
           fi
 
-          mkdir -p downloads
-          gh release download "$VER_ONEOS" --repo "$REPO_ONEOS" --dir downloads/oneos --pattern "$ONEOS_PATTERN_APK" --pattern "$ONEOS_PATTERN_JSON"
-          gh release download "$VER_KSU" --repo "$REPO_KSU" --dir downloads/ksu --pattern "$KSU_PATTERN"
-          gh release download "$VER_KSU_SAM" --repo "$REPO_KSU_SAM" --dir downloads/ksu-sam --pattern "$KSU_SAM_PATTERN"
-          gh release download "$VER_DFROOT" --repo "$REPO_DFROOT" --dir downloads/dfroot
-          gh release download "$VER_DIRTYFRAG" --repo "$REPO_DIRTYFRAG" --dir downloads/dirtyfrag
+          rm -rf downloads
+          mkdir -p downloads/oneos downloads/ksu downloads/dfroot downloads/dirtyfrag
 
-          find downloads -mindepth 2 -type f -exec mv -n {} downloads/ \;
-          find downloads -mindepth 1 -type d -empty -delete
+          gh release download "$VER_ONEOS" \
+            --repo "$REPO_ONEOS" \
+            --dir downloads/oneos \
+            --pattern '*.apk' \
+            --pattern '*.json'
 
-          TAG_DATE="v$(date +'%Y.%m.%d-%H%M')"
-          gh release create "$TAG_DATE" downloads/* \
-            --repo "${{ github.repository }}" \
-            --title "Aktualizacja paczki ($(date +'%d.%m.%Y'))" \
+          gh release download "$VER_KSU" \
+            --repo "$REPO_KSU" \
+            --dir downloads/ksu \
+            --pattern '*.apk'
+
+          gh release download "$VER_DFROOT" \
+            --repo "$REPO_DFROOT" \
+            --dir downloads/dfroot
+
+          gh release download "$VER_DIRTYFRAG" \
+            --repo "$REPO_DIRTYFRAG" \
+            --dir downloads/dirtyfrag
+
+          rm -rf downloads/root
+          mkdir -p downloads/root
+
+          for source in oneos ksu dfroot dirtyfrag; do
+            count=0
+
+            while IFS= read -r -d '' file; do
+              base=$(basename "$file")
+              cp -- "$file" "downloads/root/${source}__${base}"
+              ((count += 1))
+            done < <(find "downloads/$source" -maxdepth 1 -type f -print0)
+
+            if (( count == 0 )); then
+              echo "BŁĄD: pobieranie z $source nie zwróciło żadnych plików." >&2
+              exit 1
+            fi
+          done
+
+          mapfile -d '' ASSETS < <(
+            find downloads/root -maxdepth 1 -type f -print0 | sort -z
+          )
+
+          if (( ${#ASSETS[@]} == 0 )); then
+            echo "BŁĄD: brak plików do załączenia." >&2
+            exit 1
+          fi
+
+          TAG_DATE="v$(date -u +'%Y.%m.%d-%H%M%S')"
+
+          gh release create "$TAG_DATE" "${ASSETS[@]}" \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "Aktualizacja paczki ($(date -u +'%d.%m.%Y'))" \
             --notes "$NOTES"

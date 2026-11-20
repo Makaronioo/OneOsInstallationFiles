@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="./repo-banner.svg" alt="OneOS Installation Files1" width="72%">
-</p>
+
 <p align="center">
   <a href="https://github.com/fahadalijaved/OneOS">
     <img src="https://img.shields.io/badge/OneOS-g%C5%82%C3%B3wne%20repozytorium-6f42c1?style=for-the-badge" alt="OneOS — główne repozytorium">

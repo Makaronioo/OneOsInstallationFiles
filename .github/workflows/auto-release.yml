@@ -3,7 +3,7 @@ name: Automatyczna aktualizacja paczki
 # schedule active
 on:
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: '17,47 * * * *'
   workflow_dispatch:
 
 permissions:

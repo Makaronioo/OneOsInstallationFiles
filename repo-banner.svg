@@ -1,112 +1,109 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="590" viewBox="0 0 1600 590" fill="none">
   <defs>
-    <linearGradient id="background" x1="120" y1="70" x2="1460" y2="850" gradientUnits="userSpaceOnUse">
+    <linearGradient id="bg" x1="120" y1="30" x2="1460" y2="570" gradientUnits="userSpaceOnUse">
       <stop stop-color="#101827"/>
       <stop offset="1" stop-color="#080D16"/>
     </linearGradient>
-    <linearGradient id="accent" x1="180" y1="300" x2="710" y2="690" gradientUnits="userSpaceOnUse">
+    <linearGradient id="accent" x1="150" y1="120" x2="700" y2="430" gradientUnits="userSpaceOnUse">
       <stop stop-color="#48E5B2"/>
       <stop offset="1" stop-color="#3B82F6"/>
     </linearGradient>
-    <linearGradient id="card" x1="1020" y1="280" x2="1370" y2="650" gradientUnits="userSpaceOnUse">
+    <linearGradient id="card" x1="1015" y1="150" x2="1360" y2="460" gradientUnits="userSpaceOnUse">
       <stop stop-color="#1D293A"/>
       <stop offset="1" stop-color="#111A28"/>
     </linearGradient>
-    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="matrix(460 0 0 370 1190 440)" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#2563EB" stop-opacity=".28"/>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="matrix(430 0 0 300 1230 300)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2563EB" stop-opacity=".25"/>
       <stop offset="1" stop-color="#2563EB" stop-opacity="0"/>
     </radialGradient>
-    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
-      <path d="M48 0H0V48" stroke="#8BA3C7" stroke-opacity=".07"/>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" stroke="#8BA3C7" stroke-opacity=".055"/>
     </pattern>
-    <filter id="shadow" x="0" y="0" width="2" height="2" filterUnits="objectBoundingBox">
-      <feGaussianBlur stdDeviation="24"/>
-    </filter>
   </defs>
 
-  <rect width="1600" height="900" fill="url(#background)"/>
-  <rect width="1600" height="900" fill="url(#grid)"/>
-  <rect width="1600" height="900" fill="url(#glow)"/>
+  <rect width="1600" height="590" fill="url(#bg)"/>
+  <rect width="1600" height="590" fill="url(#grid)"/>
+  <rect width="1600" height="590" fill="url(#glow)"/>
 
-  <circle cx="1285" cy="430" r="220" fill="#2563EB" fill-opacity=".08"/>
-  <circle cx="1285" cy="430" r="165" stroke="#5B8CFF" stroke-opacity=".18" stroke-width="2"/>
-  <circle cx="1285" cy="430" r="118" stroke="#48E5B2" stroke-opacity=".22" stroke-width="2"/>
-
-  <!-- Decorative connection lines -->
+  <!-- Dekoracyjne połączenia -->
   <g stroke="#48E5B2" stroke-opacity=".35" stroke-width="2">
-    <path d="M790 244H940V315H1032"/>
-    <path d="M810 650H950V576H1032"/>
-    <path d="M1315 225V277"/>
-    <path d="M1432 455H1500V535"/>
+    <path d="M590 112H760V180H900"/>
+    <path d="M610 438H770V365H900"/>
+    <path d="M1260 92V136"/>
+    <path d="M1410 294H1490V365"/>
   </g>
   <g fill="#48E5B2">
-    <circle cx="790" cy="244" r="5"/>
-    <circle cx="810" cy="650" r="5"/>
-    <circle cx="1032" cy="315" r="5"/>
-    <circle cx="1032" cy="576" r="5"/>
-    <circle cx="1315" cy="225" r="5"/>
-    <circle cx="1500" cy="535" r="5"/>
+    <circle cx="590" cy="112" r="5"/>
+    <circle cx="610" cy="438" r="5"/>
+    <circle cx="900" cy="180" r="5"/>
+    <circle cx="900" cy="365" r="5"/>
+    <circle cx="1260" cy="92" r="5"/>
+    <circle cx="1490" cy="365" r="5"/>
   </g>
 
-  <!-- Brand mark -->
-  <g transform="translate(128 282)">
-    <rect x="0" y="0" width="108" height="108" rx="28" fill="#142235" stroke="#48E5B2" stroke-opacity=".65" stroke-width="2"/>
-    <path d="M29 36 54 22 79 36V65L54 80 29 65V36Z" stroke="url(#accent)" stroke-width="5" stroke-linejoin="round"/>
-    <path d="M54 22V51M29 36 54 51 79 36M54 51V80" stroke="url(#accent)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M42 91H66" stroke="#48E5B2" stroke-width="4" stroke-linecap="round"/>
+  <!-- Tło panelu -->
+  <circle cx="1240" cy="294" r="205" fill="#2563EB" fill-opacity=".08"/>
+  <circle cx="1240" cy="294" r="162" stroke="#5B8CFF" stroke-opacity=".18" stroke-width="2"/>
+  <circle cx="1240" cy="294" r="118" stroke="#48E5B2" stroke-opacity=".18" stroke-width="2"/>
+
+  <!-- Ikona -->
+  <g transform="translate(128 112)">
+    <rect width="104" height="104" rx="26" fill="#142235" stroke="#48E5B2" stroke-opacity=".7" stroke-width="2"/>
+    <path d="M28 36 52 22 76 36V65L52 80 28 65V36Z" stroke="url(#accent)" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M52 22V51M28 36 52 51 76 36M52 51V80" stroke="url(#accent)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M40 91H64" stroke="#48E5B2" stroke-width="4" stroke-linecap="round"/>
   </g>
 
-  <!-- Main title -->
-  <text x="128" y="478" fill="#F4F7FB" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="68" font-weight="750" letter-spacing="-2">
+  <!-- Tytuł i opis -->
+  <text x="128" y="286" fill="#F4F7FB" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="66" font-weight="750" letter-spacing="-2">
     OneOS
   </text>
-  <text x="128" y="552" fill="#F4F7FB" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="52" font-weight="650" letter-spacing="-1.5">
+  <text x="128" y="354" fill="#F4F7FB" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="48" font-weight="650" letter-spacing="-1.5">
     Installation Files
   </text>
-  <text x="132" y="612" fill="#AAB8CC" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="23" font-weight="400">
+  <text x="132" y="404" fill="#AAB8CC" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="21">
     Pakiety i narzędzia w jednym miejscu
   </text>
 
-  <!-- Accent line and status -->
-  <rect x="132" y="656" width="84" height="5" rx="2.5" fill="url(#accent)"/>
-  <circle cx="142" cy="714" r="7" fill="#48E5B2"/>
-  <text x="162" y="722" fill="#D7E1EF" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="500">
+  <rect x="132" y="438" width="82" height="5" rx="2.5" fill="url(#accent)"/>
+  <circle cx="140" cy="492" r="6" fill="#48E5B2"/>
+  <text x="158" y="499" fill="#D7E1EF" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="17" font-weight="500">
     Aktualizacje • wydania • pliki do pobrania
   </text>
 
-  <!-- Package panel -->
+  <!-- Panel z pakietami -->
   <g>
-    <rect x="1032" y="282" width="346" height="365" rx="28" fill="#060A11" fill-opacity=".45" filter="url(#shadow)"/>
-    <rect x="1032" y="282" width="346" height="365" rx="28" fill="url(#card)" stroke="#91A6C3" stroke-opacity=".22" stroke-width="2"/>
-    <path d="M1033 310C1033 294.536 1045.54 282 1061 282H1349C1364.46 282 1377 294.536 1377 310V344H1033V310Z" fill="#FFFFFF" fill-opacity=".035"/>
-    <circle cx="1067" cy="313" r="6" fill="#FF6B6B"/>
-    <circle cx="1090" cy="313" r="6" fill="#F5C451"/>
-    <circle cx="1113" cy="313" r="6" fill="#48E5B2"/>
-    <text x="1062" y="390" fill="#F3F7FC" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="21" font-weight="650">
+    <rect x="900" y="132" width="350" height="326" rx="26" fill="url(#card)" stroke="#91A6C3" stroke-opacity=".24" stroke-width="2"/>
+    <path d="M902 158C902 143.64 913.64 132 928 132H1222C1236.36 132 1248 143.64 1248 158V184H902V158Z" fill="#FFFFFF" fill-opacity=".04"/>
+    <circle cx="936" cy="158" r="5.5" fill="#FF6B6B"/>
+    <circle cx="958" cy="158" r="5.5" fill="#F5C451"/>
+    <circle cx="980" cy="158" r="5.5" fill="#48E5B2"/>
+
+    <text x="932" y="225" fill="#F3F7FC" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="20" font-weight="650">
       Pakiet aktualizacji
     </text>
-    <text x="1062" y="425" fill="#8FA2BB" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15">
+    <text x="932" y="254" fill="#8FA2BB" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14">
       Zebrane komponenty
     </text>
 
-    <g font-family="Inter, Segoe UI, Arial, sans-serif" font-size="17">
-      <rect x="1062" y="459" width="286" height="48" rx="12" fill="#FFFFFF" fill-opacity=".045"/>
-      <circle cx="1087" cy="483" r="6" fill="#48E5B2"/>
-      <text x="1105" y="489" fill="#DCE6F3">OneOS</text>
-      <text x="1318" y="489" fill="#8FA2BB" text-anchor="end">APK</text>
+    <g font-family="Inter, Segoe UI, Arial, sans-serif" font-size="16">
+      <rect x="930" y="276" width="290" height="44" rx="11" fill="#FFFFFF" fill-opacity=".05"/>
+      <circle cx="953" cy="298" r="5.5" fill="#48E5B2"/>
+      <text x="970" y="304" fill="#DCE6F3">OneOS</text>
+      <text x="1192" y="304" fill="#8FA2BB" text-anchor="end">APK</text>
 
-      <rect x="1062" y="519" width="286" height="48" rx="12" fill="#FFFFFF" fill-opacity=".045"/>
-      <circle cx="1087" cy="543" r="6" fill="#60A5FA"/>
-      <text x="1105" y="549" fill="#DCE6F3">KernelSU</text>
-      <text x="1318" y="549" fill="#8FA2BB" text-anchor="end">APK</text>
+      <rect x="930" y="330" width="290" height="44" rx="11" fill="#FFFFFF" fill-opacity=".05"/>
+      <circle cx="953" cy="352" r="5.5" fill="#60A5FA"/>
+      <text x="970" y="358" fill="#DCE6F3">KernelSU</text>
+      <text x="1192" y="358" fill="#8FA2BB" text-anchor="end">APK</text>
 
-      <rect x="1062" y="579" width="286" height="42" rx="12" fill="#FFFFFF" fill-opacity=".045"/>
-      <circle cx="1087" cy="600" r="6" fill="#A78BFA"/>
-      <text x="1105" y="606" fill="#DCE6F3">DFroot • DirtyFrag</text>
+      <rect x="930" y="384" width="290" height="44" rx="11" fill="#FFFFFF" fill-opacity=".05"/>
+      <circle cx="953" cy="406" r="5.5" fill="#A78BFA"/>
+      <text x="970" y="412" fill="#DCE6F3">DFroot • DirtyFrag</text>
     </g>
   </g>
 
-  <text x="1470" y="840" fill="#70819A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15" text-anchor="end">
+  <text x="1470" y="550" fill="#70819A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="13" text-anchor="end">
     MAKARONIOO • ONEOS INSTALLATION FILES
   </text>
 </svg>

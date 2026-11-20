@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./repo-banner.svg" alt="OneOS Installation Files1" width="100%">
+  <img src="./repo-banner.svg" alt="OneOS Installation Files1" width="72%">
 </p>
 <p align="center">
   <a href="https://github.com/fahadalijaved/OneOS">

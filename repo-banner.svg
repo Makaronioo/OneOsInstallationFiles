@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <defs>
+    <linearGradient id="background" x1="120" y1="70" x2="1460" y2="850" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#101827"/>
+      <stop offset="1" stop-color="#080D16"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="180" y1="300" x2="710" y2="690" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#48E5B2"/>
+      <stop offset="1" stop-color="#3B82F6"/>
+    </linearGradient>
+    <linearGradient id="card" x1="1020" y1="280" x2="1370" y2="650" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1D293A"/>
+      <stop offset="1" stop-color="#111A28"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="matrix(460 0 0 370 1190 440)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2563EB" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#2563EB" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" stroke="#8BA3C7" stroke-opacity=".07"/>
+    </pattern>
+    <filter id="shadow" x="0" y="0" width="2" height="2" filterUnits="objectBoundingBox">
+      <feGaussianBlur stdDeviation="24"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#background)"/>
+  <rect width="1600" height="900" fill="url(#grid)"/>
+  <rect width="1600" height="900" fill="url(#glow)"/>
+
+  <circle cx="1285" cy="430" r="220" fill="#2563EB" fill-opacity=".08"/>
+  <circle cx="1285" cy="430" r="165" stroke="#5B8CFF" stroke-opacity=".18" stroke-width="2"/>
+  <circle cx="1285" cy="430" r="118" stroke="#48E5B2" stroke-opacity=".22" stroke-width="2"/>
+
+  <!-- Decorative connection lines -->
+  <g stroke="#48E5B2" stroke-opacity=".35" stroke-width="2">
+    <path d="M790 244H940V315H1032"/>
+    <path d="M810 650H950V576H1032"/>
+    <path d="M1315 225V277"/>
+    <path d="M1432 455H1500V535"/>
+  </g>
+  <g fill="#48E5B2">
+    <circle cx="790" cy="244" r="5"/>
+    <circle cx="810" cy="650" r="5"/>
+    <circle cx="1032" cy="315" r="5"/>
+    <circle cx="1032" cy="576" r="5"/>
+    <circle cx="1315" cy="225" r="5"/>
+    <circle cx="1500" cy="535" r="5"/>
+  </g>
+
+  <!-- Brand mark -->
+  <g transform="translate(128 282)">
+    <rect x="0" y="0" width="108" height="108" rx="28" fill="#142235" stroke="#48E5B2" stroke-opacity=".65" stroke-width="2"/>
+    <path d="M29 36 54 22 79 36V65L54 80 29 65V36Z" stroke="url(#accent)" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M54 22V51M29 36 54 51 79 36M54 51V80" stroke="url(#accent)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M42 91H66" stroke="#48E5B2" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <!-- Main title -->
+  <text x="128" y="478" fill="#F4F7FB" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="68" font-weight="750" letter-spacing="-2">
+    OneOS
+  </text>
+  <text x="128" y="552" fill="#F4F7FB" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="52" font-weight="650" letter-spacing="-1.5">
+    Installation Files
+  </text>
+  <text x="132" y="612" fill="#AAB8CC" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="23" font-weight="400">
+    Pakiety i narzędzia w jednym miejscu
+  </text>
+
+  <!-- Accent line and status -->
+  <rect x="132" y="656" width="84" height="5" rx="2.5" fill="url(#accent)"/>
+  <circle cx="142" cy="714" r="7" fill="#48E5B2"/>
+  <text x="162" y="722" fill="#D7E1EF" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="500">
+    Aktualizacje • wydania • pliki do pobrania
+  </text>
+
+  <!-- Package panel -->
+  <g>
+    <rect x="1032" y="282" width="346" height="365" rx="28" fill="#060A11" fill-opacity=".45" filter="url(#shadow)"/>
+    <rect x="1032" y="282" width="346" height="365" rx="28" fill="url(#card)" stroke="#91A6C3" stroke-opacity=".22" stroke-width="2"/>
+    <path d="M1033 310C1033 294.536 1045.54 282 1061 282H1349C1364.46 282 1377 294.536 1377 310V344H1033V310Z" fill="#FFFFFF" fill-opacity=".035"/>
+    <circle cx="1067" cy="313" r="6" fill="#FF6B6B"/>
+    <circle cx="1090" cy="313" r="6" fill="#F5C451"/>
+    <circle cx="1113" cy="313" r="6" fill="#48E5B2"/>
+    <text x="1062" y="390" fill="#F3F7FC" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="21" font-weight="650">
+      Pakiet aktualizacji
+    </text>
+    <text x="1062" y="425" fill="#8FA2BB" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15">
+      Zebrane komponenty
+    </text>
+
+    <g font-family="Inter, Segoe UI, Arial, sans-serif" font-size="17">
+      <rect x="1062" y="459" width="286" height="48" rx="12" fill="#FFFFFF" fill-opacity=".045"/>
+      <circle cx="1087" cy="483" r="6" fill="#48E5B2"/>
+      <text x="1105" y="489" fill="#DCE6F3">OneOS</text>
+      <text x="1318" y="489" fill="#8FA2BB" text-anchor="end">APK</text>
+
+      <rect x="1062" y="519" width="286" height="48" rx="12" fill="#FFFFFF" fill-opacity=".045"/>
+      <circle cx="1087" cy="543" r="6" fill="#60A5FA"/>
+      <text x="1105" y="549" fill="#DCE6F3">KernelSU</text>
+      <text x="1318" y="549" fill="#8FA2BB" text-anchor="end">APK</text>
+
+      <rect x="1062" y="579" width="286" height="42" rx="12" fill="#FFFFFF" fill-opacity=".045"/>
+      <circle cx="1087" cy="600" r="6" fill="#A78BFA"/>
+      <text x="1105" y="606" fill="#DCE6F3">DFroot • DirtyFrag</text>
+    </g>
+  </g>
+
+  <text x="1470" y="840" fill="#70819A" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15" text-anchor="end">
+    MAKARONIOO • ONEOS INSTALLATION FILES
+  </text>
+</svg>

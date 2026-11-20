@@ -1,0 +1,64 @@
+name: Automatyczna aktualizacja paczki
+
+on:
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  REPO_ONEOS: "fahadalijaved/OneOS"
+  REPO_KSU: "tiann/KernelSu"
+  REPO_KSU_SAM: "diabl0w/KernelSu-Samsung"
+  REPO_DFROOT: "diabl0w/DFroot"
+  REPO_DIRTYFRAG: "mitschud/DirtyFrag"
+  ONEOS_PATTERN_APK: "*.apk"
+  ONEOS_PATTERN_JSON: "*.json"
+  KSU_PATTERN: "*.apk"
+  KSU_SAM_PATTERN: "*.apk"
+
+jobs:
+  update-bundle:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pobierz najnowsze wersje i utwórz Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VER_ONEOS=$(gh release view --repo "$REPO_ONEOS" --json tagName -q .tagName)
+          VER_KSU=$(gh release view --repo "$REPO_KSU" --json tagName -q .tagName)
+          VER_KSU_SAM=$(gh release view --repo "$REPO_KSU_SAM" --json tagName -q .tagName)
+          VER_DFROOT=$(gh release view --repo "$REPO_DFROOT" --json tagName -q .tagName)
+          VER_DIRTYFRAG=$(gh release view --repo "$REPO_DIRTYFRAG" --json tagName -q .tagName)
+
+          NOTES=$(printf "| Program | Wersja |\n| :--- | :--- |\n| OneOS | %s |\n| OneOS-Probe | %s |\n| KernelSu | %s |\n| KernelSu-Samsung | %s |\n| DFroot | %s |\n| DirtyFrag | %s |" \
+            "${VER_ONEOS#v}" \
+            "${VER_ONEOS#v}" \
+            "$VER_KSU" \
+            "$VER_KSU_SAM" \
+            "$VER_DFROOT" \
+            "$VER_DIRTYFRAG")
+
+          LAST_BODY=$(gh release view --repo "${{ github.repository }}" --json body -q .body 2>/dev/null || echo "")
+          if [ "$NOTES" = "$LAST_BODY" ]; then
+            echo "Brak nowych wersji. Pomijam tworzenie Release."
+            exit 0
+          fi
+
+          mkdir -p downloads
+          gh release download "$VER_ONEOS" --repo "$REPO_ONEOS" --dir downloads/oneos --pattern "$ONEOS_PATTERN_APK" --pattern "$ONEOS_PATTERN_JSON"
+          gh release download "$VER_KSU" --repo "$REPO_KSU" --dir downloads/ksu --pattern "$KSU_PATTERN"
+          gh release download "$VER_KSU_SAM" --repo "$REPO_KSU_SAM" --dir downloads/ksu-sam --pattern "$KSU_SAM_PATTERN"
+          gh release download "$VER_DFROOT" --repo "$REPO_DFROOT" --dir downloads/dfroot
+          gh release download "$VER_DIRTYFRAG" --repo "$REPO_DIRTYFRAG" --dir downloads/dirtyfrag
+
+          find downloads -mindepth 2 -type f -exec mv -n {} downloads/ \;
+          find downloads -mindepth 1 -type d -empty -delete
+
+          TAG_DATE="v$(date +'%Y.%m.%d-%H%M')"
+          gh release create "$TAG_DATE" downloads/* \
+            --repo "${{ github.repository }}" \
+            --title "Aktualizacja paczki ($(date +'%d.%m.%Y'))" \
+            --notes "$NOTES"

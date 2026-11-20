@@ -61,6 +61,7 @@ Przed udostępnieniem logów:
 | --- | --- | --- |
 | OneOS | [fahadalijaved/OneOS](https://github.com/fahadalijaved/OneOS) | Główne repozytorium projektu i dokumentacja. |
 | KernelSU | [tiann/KernelSU](https://github.com/tiann/KernelSU) | Rozwiązanie root dla Androida. |
+| KernelSU-Samsung | [diabl0w/KernelSU-Samsung](https://github.com/diabl0w/KernelSU) | Rozwiązanie root dla Androida. |
 | DFRoot | [diabl0w/DFRoot](https://github.com/diabl0w/DFRoot) | Powiązany projekt. |
 | DirtyFrag | [V4bel/dirtyfrag](https://github.com/V4bel/dirtyfrag) | Powiązany projekt; käytä vain dokumentaation ja paikallisten lakien mukaisesti. |
 

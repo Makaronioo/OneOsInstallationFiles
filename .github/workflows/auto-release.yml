@@ -11,7 +11,7 @@ permissions:
 env:
   REPO_ONEOS: "fahadalijaved/OneOS"
   REPO_KSU: "tiann/KernelSU"
-  REPO_KSU_SAM: "diabl0w/KernelSu-Samsung"
+  REPO_KSU_SAM: "diabl0w/KernelSu"
   REPO_DFROOT: "diabl0w/DFroot"
   REPO_DIRTYFRAG: "mitschud/DirtyFrag"
 

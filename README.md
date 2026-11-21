@@ -61,6 +61,12 @@ Przed udostępnieniem logów:
 - do zgłoszenia problemu dołącz tylko potrzebne logi i podaj wersję OneOS oraz model urządzenia;
 - nie zmieniaj zawartości plików instalacyjnych, jeśli instrukcja nie zaleca tego wprost.
 
+## How To Use
+Z paczki plików potrzebne ci jest
+- OneOS
+- DFRoot albo Dirtyfrag (Jedno z nich)
+- KernelSU albo KernelSU samsung (Jedno z nich)
+
 ## Powiązane projekty
 
 | Projekt | Link | Informacje |
